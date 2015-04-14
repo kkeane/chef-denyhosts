@@ -22,7 +22,9 @@ include_recipe "yum-epel"
 
 package "denyhosts"
 
-unless node["platform"] == "debian"
+if node["platform"] == "debian"
+  package "tcpd"
+else
   package "tcp_wrappers"
 end
 
