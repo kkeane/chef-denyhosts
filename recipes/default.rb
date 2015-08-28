@@ -21,7 +21,12 @@
 include_recipe "yum-epel"
 
 package "denyhosts"
-package "tcp_wrappers"
+
+if node["platform"] == "debian"
+  package "tcpd"
+else
+  package "tcp_wrappers"
+end
 
 workdir = node['denyhosts']['config']['WORK_DIR']
 
